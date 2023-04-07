@@ -11,3 +11,21 @@ mat-expansion-panel {
   font-weight: bold;
   text-align: center;
 }
+
+.editBtn {
+  background: blue;
+  font-weight: bold;
+  color: white;
+  padding: 4px 8px;
+  border: none;
+  outline: none;
+}
+.delBtn {
+  background: red;
+  font-weight: bold;
+  color: white;
+  padding: 4px 8px;
+  border: none;
+  outline: none;
+  margin-left: 2rem;
+}
