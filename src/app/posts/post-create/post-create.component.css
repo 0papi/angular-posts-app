@@ -1,0 +1,13 @@
+mat-form-field,
+textarea {
+  width: 100%;
+}
+
+button {
+  color: white;
+  border: none;
+  outline: none;
+  background-color: blue;
+  padding: 4px 0;
+  font-size: 1.2rem;
+}
