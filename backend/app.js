@@ -1,6 +1,20 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
+const dotEnv = require("dotenv").config();
+
+const PostSchema = require("./models/post");
 
 const app = express();
+
+// connect to database
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => console.log("connected to database"))
+  .catch(() => console.log("connection failed"));
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -15,25 +29,32 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/posts", (req, res) => {
-  const posts = [
-    {
-      id: "1jask038akd",
-      title: "First dummy",
-      content: "This is the first one",
-    },
-    {
-      id: "4903w2jlkadas",
-      title: "Second dummy",
-      content: "This is the second one",
-    },
-    {
-      id: "9403jlkadsfas",
-      title: "Third dummy",
-      content: "This is the third one",
-    },
-  ];
+app.post("/api/posts", (req, res, next) => {
+  const post = new PostSchema({
+    title: req.body.title,
+    content: req.body.content,
+  });
+
+  post.save();
+
+  res
+    .status(201)
+    .json({ message: "Post added successfully", postId: post._id });
+});
+
+app.get("/api/posts", async (req, res) => {
+  const posts = await PostSchema.find();
   res.status(200).json({ message: "Posts fetched successfully", posts });
+});
+
+app.delete("/api/posts/:id", async (req, res) => {
+  const { id } = req.params;
+
+  const deletedPost = await PostSchema.findOneAndDelete({ _id: id });
+
+  res
+    .status(200)
+    .json({ message: "Post deleted successfully", post: deletedPost });
 });
 
 module.exports = app;
