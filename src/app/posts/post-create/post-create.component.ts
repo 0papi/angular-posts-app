@@ -13,8 +13,7 @@ export class PostCreateComponent {
 
   onAddPost(form: NgForm) {
     if (form.invalid) return;
-    const post: Post = {
-      id: '803i909320jkoasds',
+    const post: Omit<Post, 'id'> = {
       title: form.value.title,
       content: form.value.content,
     };
