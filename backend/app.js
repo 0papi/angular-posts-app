@@ -3,7 +3,8 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const dotEnv = require("dotenv").config();
 
-const PostSchema = require("./models/post");
+const userRouter = require("./routes/user");
+const postRouter = require("./routes/post");
 
 const app = express();
 
@@ -20,7 +21,7 @@ app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Headers",
-    "Origin, X-Requested-With, Content-Type, Accept"
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
   );
   res.setHeader(
     "Access-Control-Allow-Methods",
@@ -29,32 +30,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.post("/api/posts", (req, res, next) => {
-  const post = new PostSchema({
-    title: req.body.title,
-    content: req.body.content,
-  });
-
-  post.save();
-
-  res
-    .status(201)
-    .json({ message: "Post added successfully", postId: post._id });
-});
-
-app.get("/api/posts", async (req, res) => {
-  const posts = await PostSchema.find();
-  res.status(200).json({ message: "Posts fetched successfully", posts });
-});
-
-app.delete("/api/posts/:id", async (req, res) => {
-  const { id } = req.params;
-
-  const deletedPost = await PostSchema.findOneAndDelete({ _id: id });
-
-  res
-    .status(200)
-    .json({ message: "Post deleted successfully", post: deletedPost });
-});
+app.use("/api/user", userRouter);
+app.use("/api/posts", postRouter);
 
 module.exports = app;

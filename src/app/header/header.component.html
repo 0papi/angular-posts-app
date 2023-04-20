@@ -1,1 +1,21 @@
-<mat-toolbar color="primary"> MyMessages </mat-toolbar>
+<mat-toolbar color="primary">
+  <span>
+    <a routerLink="/">MyMessages</a>
+  </span>
+
+  <span class="spacer"></span>
+  <ul class="linktags">
+    <li *ngIf="userIsAuthenticated">
+      <a mat-button routerLink="/create" routerLinkActive="active">New Post</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/signin" routerLinkActive="active">Login</a>
+    </li>
+    <li *ngIf="!userIsAuthenticated">
+      <a mat-button routerLink="/signup" routerLinkActive="active">Sign Up</a>
+    </li>
+    <li *ngIf="userIsAuthenticated">
+      <button>Logout</button>
+    </li>
+  </ul>
+</mat-toolbar>

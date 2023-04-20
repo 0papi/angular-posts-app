@@ -1,0 +1,10 @@
+.wrapper {
+  padding: 20px;
+}
+
+.formWrapper {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  column-gap: 1rem;
+}

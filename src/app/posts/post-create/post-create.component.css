@@ -11,3 +11,21 @@ button {
   padding: 4px 0;
   font-size: 1.2rem;
 }
+
+.submitBtn {
+  padding: 10px 0;
+  margin: 10px;
+}
+
+input[type="file"] {
+  visibility: hidden;
+}
+
+.image-preview {
+  height: 5rem;
+  margin: 1rem 0;
+}
+
+.image-preview img {
+  height: 100%;
+}

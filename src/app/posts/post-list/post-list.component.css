@@ -16,16 +16,20 @@ mat-expansion-panel {
   background: blue;
   font-weight: bold;
   color: white;
-  padding: 4px 8px;
+  padding: 8px 8px;
   border: none;
   outline: none;
+  width: 100px;
+  border-radius: 4px;
 }
 .delBtn {
   background: red;
   font-weight: bold;
   color: white;
-  padding: 4px 8px;
+  padding: 8px 8px;
   border: none;
   outline: none;
   margin-left: 2rem;
+  width: 100px;
+  border-radius: 4px;
 }
